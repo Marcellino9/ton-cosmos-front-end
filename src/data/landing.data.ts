@@ -198,5 +198,31 @@ export const plans = {
     },
 };
 
+/**
+ * URL du blog (sous-domaine séparé, déployé sur Vercel).
+ * Centralisée ici : elle sert au header, au footer et au JSON-LD.
+ */
+export const BLOG_URL = 'https://blog.toncosmos.fr/';
+
+export type NavLink = {
+    label: string;
+    href: string;
+    /** Lien vers un autre domaine/sous-domaine (rendu avec target + rel). */
+    external?: boolean;
+};
+
+/**
+ * Navigation du header — source unique de vérité.
+ *
+ * `prefix` vaut '' sur la landing (ancres locales) et '/' sur les autres
+ * pages publiques, pour que les ancres renvoient d'abord vers l'accueil.
+ */
+export const buildNavLinks = (prefix: '' | '/' = ''): NavLink[] => [
+    { label: 'Accueil', href: `${prefix}#hero` },
+    { label: 'Contenu', href: `${prefix}#contenu` },
+    { label: 'Processus', href: `${prefix}#processus` },
+    { label: 'Blog', href: BLOG_URL, external: true },
+    { label: 'Commander', href: `${prefix}#commander` },
+];
 
 export const links = {};

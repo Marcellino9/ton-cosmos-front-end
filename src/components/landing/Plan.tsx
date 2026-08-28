@@ -7,7 +7,10 @@ type Plan = 'essential' | 'complete';
 
 export default function PlanSection() {
     return (
-        <section className="relative bg-transparent backdrop-blur-sm py-10 sm:py-20 px-6">
+        <section
+            id="tarifs"
+            className="relative bg-transparent backdrop-blur-sm py-10 sm:py-20 px-6"
+        >
             <div className="mx-auto max-w-4xl">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

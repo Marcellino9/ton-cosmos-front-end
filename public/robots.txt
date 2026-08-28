@@ -1,23 +1,18 @@
 # Robots.txt — toncosmos.fr
-# Généré le 2026-07-04
+# Fichier maintenu à la main : vite-plugin-sitemap est configuré avec
+# generateRobotsTxt: false pour ne pas l'écraser au build (voir vite.config.ts).
 
 User-agent: *
 Allow: /
-Allow: /choose-plans
-Allow: /payments
-Allow: /payments-success
 
 # Bloquer les espaces privés (admin, auth)
 Disallow: /administrator/
-Disallow: /administrator/auth/
-Disallow: /administrator/managery/
 
 # Bloquer les ressources non pertinentes pour l'indexation
 Disallow: /src/
 Disallow: /*.json$
 
-# Sitemap
+# Sitemaps — le blog est un sous-domaine distinct, on le déclare ici aussi
+# pour que Google remonte jusqu'à lui depuis le domaine principal.
 Sitemap: https://toncosmos.fr/sitemap.xml
-
-# Délai de crawl recommandé (optionnel, ignoré par Google)
-Crawl-delay: 10
+Sitemap: https://blog.toncosmos.fr/sitemap.xml

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Footer from '@/components/landing/Footer';
 import HeaderSection from '@/components/landing/Header';
-import { plans } from '@/data/landing.data';
+import { buildNavLinks, plans } from '@/data/landing.data';
 import { ArrowLeft, Check, ChevronRight, Loader2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,6 @@ import { CREATE_ORDER_ENDPOINT, useApi } from '@/hooks/UseApi';
 import ScrollToTop from '@/components/ScrollToTop';
 
 type Plan = 'essentiel' | 'complet' | 'annee_cosmique' | 'cosmos_integral';
-
 
 interface Order {
     id: number;
@@ -41,12 +40,7 @@ type OrderData = {
     selected_plan: Plan;
 };
 
-const navLinks = [
-    { label: 'Accueil', href: '/landing#hero' },
-    { label: 'Contenu', href: '/landing#contenu' },
-    { label: 'Processus', href: '/landing#processus' },
-    { label: 'Commander', href: '/landing#commander' },
-];
+const navLinks = buildNavLinks('/');
 
 export default function SelectPlanPage() {
     const navigate = useNavigate();
@@ -158,8 +152,8 @@ export default function SelectPlanPage() {
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-5 items-start mb-12">
-                    {(Object.entries(plans) as [Plan, typeof plans.essentiel][])
-                        .map(([key, plan]) => (
+                    {(Object.entries(plans) as [Plan, typeof plans.essentiel][]).map(
+                        ([key, plan]) => (
                             <button
                                 key={key}
                                 onClick={() => {
@@ -171,9 +165,12 @@ export default function SelectPlanPage() {
                                         : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(255,255,255,0.08)]'
                                 }`}
                             >
-                                {('popular' in plan && (plan as { popular?: boolean }).popular) || ('badge' in plan && (plan as { badge?: string }).badge) ? (
+                                {('popular' in plan && (plan as { popular?: boolean }).popular) ||
+                                ('badge' in plan && (plan as { badge?: string }).badge) ? (
                                     <div className="absolute -top-3 left-8 px-4 py-1.5 bg-[#d4b96a] text-[#09090b] text-[11px] font-medium rounded-full tracking-wider uppercase">
-                                        {'badge' in plan && (plan as { badge: string }).badge ? (plan as { badge: string }).badge : 'Recommandé'}
+                                        {'badge' in plan && (plan as { badge: string }).badge
+                                            ? (plan as { badge: string }).badge
+                                            : 'Recommandé'}
                                     </div>
                                 ) : null}
 

@@ -5,10 +5,7 @@
         <meta name="google" content="notranslate" />
         <link rel="icon" type="image/png" href="/logo.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
         <!-- ===== SEO PRIMAIRE ===== -->
         <title>Ton Cosmos — Thème Astral Personnalisé</title>
@@ -23,6 +20,11 @@
         <meta name="author" content="Ton Cosmos" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://toncosmos.fr/" />
+
+        <meta
+            name="google-site-verification"
+            content="ajyovOJszPEs9zjSMrwXCo389c8xYHSNM0vpmgvRh_U"
+        />
 
         <!-- ===== OPEN GRAPH (Facebook, LinkedIn, etc.) ===== -->
         <meta property="og:type" content="website" />
@@ -49,19 +51,45 @@
 
         <!-- ===== STRUCTURED DATA (JSON-LD) ===== -->
         <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Ton Cosmos",
-            "url": "https://toncosmos.fr",
-            "description": "Service de thème astral personnalisé basé sur votre date, heure et lieu de naissance.",
-            "inLanguage": "fr",
-            "potentialAction": {
-                "@type": "SearchAction",
-                "target": "https://toncosmos.fr/?q={search_term_string}",
-                "query-input": "required name=search_term_string"
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://toncosmos.fr/#website",
+                        "name": "Ton Cosmos",
+                        "url": "https://toncosmos.fr",
+                        "description": "Service de thème astral personnalisé basé sur votre date, heure et lieu de naissance.",
+                        "inLanguage": "fr",
+                        "publisher": { "@id": "https://toncosmos.fr/#organization" },
+                        "potentialAction": {
+                            "@type": "SearchAction",
+                            "target": "https://toncosmos.fr/?q={search_term_string}",
+                            "query-input": "required name=search_term_string"
+                        }
+                    },
+                    {
+                        "@type": "Organization",
+                        "@id": "https://toncosmos.fr/#organization",
+                        "name": "Ton Cosmos",
+                        "url": "https://toncosmos.fr",
+                        "logo": "https://toncosmos.fr/logo.png",
+                        "email": "contact@toncosmos.fr",
+                        "sameAs": [
+                            "https://blog.toncosmos.fr/",
+                            "https://www.tiktok.com/@indira_astrologue"
+                        ]
+                    },
+                    {
+                        "@type": "Blog",
+                        "@id": "https://blog.toncosmos.fr/#blog",
+                        "name": "Ton Cosmos · Blog Astrologie",
+                        "url": "https://blog.toncosmos.fr/",
+                        "inLanguage": "fr",
+                        "publisher": { "@id": "https://toncosmos.fr/#organization" }
+                    }
+                ]
             }
-        }
         </script>
 
         <!-- ===== PERFORMANCE & SÉCURITÉ ===== -->

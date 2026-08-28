@@ -1,17 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { CosmosLogo } from '@/components/icons';
 import { Button } from '@/components/ui/button';
+import type { NavLink } from '@/data/landing.data';
 
-export default function HeaderSection({
-    navLinks,
-}: {
-    navLinks: { label: string; href: string }[];
-}) {
+export default function HeaderSection({ navLinks }: { navLinks: NavLink[] }) {
     const location = useLocation();
     const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
+
+    const isActive = (link: NavLink) =>
+        !link.external && location.hash !== '' && link.href.endsWith(location.hash);
+
+    // Le CTA pointe sur la meme ancre que l'entree « Commander », donc avec le
+    // meme prefixe : sur /choose-plans ou /payments un simple '#commander'
+    // ne renverrait nulle part.
+    const ctaHref =
+        navLinks.find((link) => !link.external && link.href.endsWith('#commander'))?.href ??
+        '#commander';
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 20);
@@ -39,13 +46,15 @@ export default function HeaderSection({
                             <a
                                 key={index}
                                 href={link.href}
-                                className={`text-sm  transition-colors duration-300 tracking-wide ${location.hash === link.href ? 'text-white' : 'text-[#a1a1aa] hover:text-[#fafafa]'}`}
+                                {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
+                                className={`inline-flex items-center gap-1 text-sm transition-colors duration-300 tracking-wide ${isActive(link) ? 'text-white' : 'text-[#a1a1aa] hover:text-[#fafafa]'}`}
                             >
                                 {link.label}
+                                {link.external && <ArrowUpRight size={14} aria-hidden="true" />}
                             </a>
                         ))}
                         <a
-                            href="#commander"
+                            href={ctaHref}
                             className="px-4 py-2.5 rounded-sm text-sm bg-[#d4b96a] hover:bg-[#dec87e] text-[#09090b] font-medium cursor-pointer transition-all"
                         >
                             Obtenir mon rapport
@@ -75,10 +84,12 @@ export default function HeaderSection({
                             <a
                                 key={index}
                                 href={link.href}
-                                className={`block py-3 text-base transition-colors ${location.hash === link.href ? 'text-white' : 'text-[#a1a1aa] hover:text-[#fafafa]'}`}
+                                {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
+                                className={`flex items-center gap-1.5 py-3 text-base transition-colors ${isActive(link) ? 'text-white' : 'text-[#a1a1aa] hover:text-[#fafafa]'}`}
                                 onClick={() => setMobileOpen(false)}
                             >
                                 {link.label}
+                                {link.external && <ArrowUpRight size={16} aria-hidden="true" />}
                             </a>
                         ))}
                     </div>

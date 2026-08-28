@@ -1,3 +1,5 @@
+import { BLOG_URL } from '@/data/landing.data';
+
 export default function Footer() {
     return (
         <section className="bg-slate-900/50 backdrop-blur-2xl text-slate-100 py-12 px-4 sm:px-6 lg:px-8 z-50">
@@ -16,23 +18,39 @@ export default function Footer() {
                         <h4 className="font-serif text-white mb-4">Produit</h4>
                         <ul className="space-y-2 text-sm text-slate-400">
                             <li>
-                                <a href="#" className="hover:text-white transition-colors">
+                                <a
+                                    href="/#commander"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Commencer
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-white transition-colors">
+                                <a
+                                    href="/#processus"
+                                    className="hover:text-white transition-colors"
+                                >
                                     Comment ça marche
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-white transition-colors">
+                                <a href="/#tarifs" className="hover:text-white transition-colors">
                                     Formules
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="hover:text-white transition-colors">
+                                <a href="/#faq" className="hover:text-white transition-colors">
                                     FAQ
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={BLOG_URL}
+                                    target="_blank"
+                                    rel="noopener"
+                                    className="hover:text-white transition-colors"
+                                >
+                                    Blog astrologie
                                 </a>
                             </li>
                         </ul>
@@ -72,6 +90,8 @@ export default function Footer() {
                             <li>
                                 <a
                                     href="https://www.tiktok.com/@indira_astrologue?_r=1&_t=ZN-97rhneZuXDy&fbclid=IwY2xjawS7bQpleHRuA2FlbQIxMABicmlkETEzTFNRYlBoMzlyMVhVVkltc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHq-4GEgPzlB_XinTi1V5Nu1Gfkkn3Tfo1Lz7ZTtugRNzyQRoxVpen12Jyt8D_aem_o1_sU9QgBaJzW2uXgYdJdA"
+                                    target="_blank"
+                                    rel="noopener"
                                     className="hover:text-white transition-colors"
                                 >
                                     TikTok @Indira

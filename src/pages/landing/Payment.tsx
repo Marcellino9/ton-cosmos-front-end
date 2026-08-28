@@ -6,15 +6,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { OrnamentDivider } from '@/components/icons';
 import { CHECK_STRIPE_SESSION_ENDPOINT, useApi } from '@/hooks/UseApi';
-import { plans } from '@/data/landing.data';
+import { buildNavLinks, plans } from '@/data/landing.data';
 import ScrollToTop from '@/components/ScrollToTop';
 
-const navLinks = [
-    { label: 'Accueil', href: '/landing#hero' },
-    { label: 'Contenu', href: '/landing#contenu' },
-    { label: 'Processus', href: '/landing#processus' },
-    { label: 'Commander', href: '/landing#commander' },
-];
+const navLinks = buildNavLinks('/');
 
 interface CheckSessionResponse {
     checkout_url: string;
@@ -58,10 +53,11 @@ export default function PayementPage() {
     const plan = paymentData ? plans[paymentData.selected_plan] : null;
     const basePriceNum = plan ? plan.priceNum : 0;
 
-    const AUDIO_BUMP_PRICE = 9.90;
-    const POSTER_BUMP_PRICE = 14.90;
+    const AUDIO_BUMP_PRICE = 9.9;
+    const POSTER_BUMP_PRICE = 14.9;
 
-    const computedTotal = basePriceNum +
+    const computedTotal =
+        basePriceNum +
         (hasAudio && !isIntegral ? AUDIO_BUMP_PRICE : 0) +
         (hasPoster && !isIntegral ? POSTER_BUMP_PRICE : 0);
 
@@ -72,7 +68,8 @@ export default function PayementPage() {
 
         setprocessing(true);
 
-        const computedAmountTotal = paymentData.amount_total +
+        const computedAmountTotal =
+            paymentData.amount_total +
             (hasAudio && !isIntegral ? 990 : 0) +
             (hasPoster && !isIntegral ? 1490 : 0);
 
@@ -201,12 +198,14 @@ export default function PayementPage() {
                             isIntegral
                                 ? 'border-[#d4b96a]/20 bg-[rgba(212,185,106,0.02)] cursor-default'
                                 : hasAudio
-                                ? 'border-[#d4b96a]/30 bg-[rgba(255,255,255,0.04)] cursor-pointer'
-                                : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(255,255,255,0.1)] cursor-pointer'
+                                  ? 'border-[#d4b96a]/30 bg-[rgba(255,255,255,0.04)] cursor-pointer'
+                                  : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(255,255,255,0.1)] cursor-pointer'
                         }`}
                     >
                         <div className="flex items-start gap-4">
-                            <div className={`p-2.5 rounded-lg ${hasAudio || isIntegral ? 'bg-[#d4b96a]/10 text-[#d4b96a]' : 'bg-zinc-800 text-zinc-400'}`}>
+                            <div
+                                className={`p-2.5 rounded-lg ${hasAudio || isIntegral ? 'bg-[#d4b96a]/10 text-[#d4b96a]' : 'bg-zinc-800 text-zinc-400'}`}
+                            >
                                 <Headphones className="w-5 h-5" />
                             </div>
                             <div className="flex-1">
@@ -219,14 +218,23 @@ export default function PayementPage() {
                                     </span>
                                 </div>
                                 <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                                    Écoutez l'analyse de votre thème astral lue par une voix IA chaleureuse et immersive. Parfait pour méditer sur vos transits.
+                                    Écoutez l'analyse de votre thème astral lue par une voix IA
+                                    chaleureuse et immersive. Parfait pour méditer sur vos transits.
                                 </p>
                             </div>
                             {!isIntegral && (
-                                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                                    hasAudio ? 'border-[#d4b96a] bg-[#d4b96a]' : 'border-zinc-700'
-                                }`}>
-                                    {hasAudio && <span className="text-[10px] text-[#09090b] font-bold">✓</span>}
+                                <div
+                                    className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+                                        hasAudio
+                                            ? 'border-[#d4b96a] bg-[#d4b96a]'
+                                            : 'border-zinc-700'
+                                    }`}
+                                >
+                                    {hasAudio && (
+                                        <span className="text-[10px] text-[#09090b] font-bold">
+                                            ✓
+                                        </span>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -241,12 +249,14 @@ export default function PayementPage() {
                             isIntegral
                                 ? 'border-[#d4b96a]/20 bg-[rgba(212,185,106,0.02)] cursor-default'
                                 : hasPoster
-                                ? 'border-[#d4b96a]/30 bg-[rgba(255,255,255,0.04)] cursor-pointer'
-                                : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(255,255,255,0.1)] cursor-pointer'
+                                  ? 'border-[#d4b96a]/30 bg-[rgba(255,255,255,0.04)] cursor-pointer'
+                                  : 'border-[rgba(255,255,255,0.06)] bg-[rgba(255,255,255,0.015)] hover:border-[rgba(255,255,255,0.1)] cursor-pointer'
                         }`}
                     >
                         <div className="flex items-start gap-4">
-                            <div className={`p-2.5 rounded-lg ${hasPoster || isIntegral ? 'bg-[#d4b96a]/10 text-[#d4b96a]' : 'bg-zinc-800 text-zinc-400'}`}>
+                            <div
+                                className={`p-2.5 rounded-lg ${hasPoster || isIntegral ? 'bg-[#d4b96a]/10 text-[#d4b96a]' : 'bg-zinc-800 text-zinc-400'}`}
+                            >
                                 <Image className="w-5 h-5" />
                             </div>
                             <div className="flex-1">
@@ -259,14 +269,24 @@ export default function PayementPage() {
                                     </span>
                                 </div>
                                 <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                                    Recevez un fichier PDF haute définition (format A3/A2) de votre carte du ciel natale vectorielle, prêt à être imprimé et encadré.
+                                    Recevez un fichier PDF haute définition (format A3/A2) de votre
+                                    carte du ciel natale vectorielle, prêt à être imprimé et
+                                    encadré.
                                 </p>
                             </div>
                             {!isIntegral && (
-                                <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                                    hasPoster ? 'border-[#d4b96a] bg-[#d4b96a]' : 'border-zinc-700'
-                                }`}>
-                                    {hasPoster && <span className="text-[10px] text-[#09090b] font-bold">✓</span>}
+                                <div
+                                    className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+                                        hasPoster
+                                            ? 'border-[#d4b96a] bg-[#d4b96a]'
+                                            : 'border-zinc-700'
+                                    }`}
+                                >
+                                    {hasPoster && (
+                                        <span className="text-[10px] text-[#09090b] font-bold">
+                                            ✓
+                                        </span>
+                                    )}
                                 </div>
                             )}
                         </div>
@@ -305,4 +325,3 @@ export default function PayementPage() {
         </main>
     );
 }
-

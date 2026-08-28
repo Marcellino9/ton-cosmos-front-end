@@ -8,16 +8,12 @@ import HowItWorks from '@/components/landing/HowItWorks';
 import OrderForm from '@/components/landing/OrderForm';
 import PlanSection from '@/components/landing/Plan';
 import { useNavigate } from 'react-router-dom';
+import { buildNavLinks } from '@/data/landing.data';
 
 export default function LandingPage() {
     const navigate = useNavigate();
 
-    const navLinks = [
-        { label: 'Accueil', href: '#hero' },
-        { label: 'Contenu', href: '#contenu' },
-        { label: 'Processus', href: '#processus' },
-        { label: 'Commander', href: '#commander' },
-    ];
+    const navLinks = buildNavLinks();
 
     const onCreateOrder = (data: PayloadBirthForm) => {
         const payload = {

@@ -15,13 +15,9 @@ import {
 } from 'lucide-react';
 import { WEB_SOCKET_BASE, BASE_USER_API } from '@/hooks/UseApi';
 import ScrollToTop from '@/components/ScrollToTop';
+import { buildNavLinks } from '@/data/landing.data';
 
-const navLinks = [
-    { label: 'Accueil', href: '#hero' },
-    { label: 'Contenu', href: '#contenu' },
-    { label: 'Processus', href: '#processus' },
-    { label: 'Commander', href: '#commander' },
-];
+const navLinks = buildNavLinks('/');
 
 function StepItem({
     icon: Icon,
